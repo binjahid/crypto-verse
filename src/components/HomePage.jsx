@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { Cryptocurrencies, News } from "../components";
 const HomePage = () => {
   const { Title } = Typography;
-  const { data, isFetching } = useGetCryptosQuery();
+  const { data, isFetching } = useGetCryptosQuery(10);
   console.log(data);
   const globalStats = data?.data?.stats;
   console.log(globalStats);
