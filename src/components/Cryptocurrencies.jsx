@@ -2,7 +2,7 @@ import { Card, Col, Row, Input } from "antd";
 import millify from "millify";
 import React from "react";
 import { useGetCryptosQuery } from "../services/cryptoAPI";
-
+import { Link } from "react-router-dom";
 const Cryptocurrencies = ({ simplified }) => {
   const count = simplified ? 10 : 100;
   const { data: cryptoList, isFetching } = useGetCryptosQuery(count);
@@ -41,21 +41,23 @@ const Cryptocurrencies = ({ simplified }) => {
             key={coin.id}
             className="crypto-card"
           >
-            <Card
-              title={`${coin.rank}. ${coin.name}`}
-              extra={
-                <img
-                  className="crypto-image"
-                  src={coin.iconUrl}
-                  alt="coin icon"
-                />
-              }
-              hoverable
-            >
-              <p>Price : {millify(coin.price)}</p>
-              <p>Market Cap : {millify(coin.marketCap)}</p>
-              <p>Daily Change : {millify(coin.change)}</p>
-            </Card>
+            <Link to={`/crypto/${coin.id}`}>
+              <Card
+                title={`${coin.rank}. ${coin.name}`}
+                extra={
+                  <img
+                    className="crypto-image"
+                    src={coin.iconUrl}
+                    alt="coin icon"
+                  />
+                }
+                hoverable
+              >
+                <p>Price : {millify(coin.price)}</p>
+                <p>Market Cap : {millify(coin.marketCap)}</p>
+                <p>Daily Change : {millify(coin.change)}</p>
+              </Card>
+            </Link>
           </Col>
         ))}
       </Row>
